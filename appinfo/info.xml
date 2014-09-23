@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<info>
+    <id>imgcrawl</id>
+    <name>ImgCrawl</name>
+    <description>Crawl the Internet to find, display, and store images.</description>
+    <version>1.0</version>
+    <licence>AGPL</licence>
+    <author>Ackinty Strappa</author>
+    <require>7</require>
+</info>
