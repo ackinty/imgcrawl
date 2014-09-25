@@ -12,6 +12,8 @@ namespace OCA\ImgCrawl\App;
 
 use \OCP\AppFramework\App;
 use \OCA\ImgCrawl\Controller\PageController;
+use \OCA\ImgCrawl\Controller\ImgCrawlApiController;
+use \OCA\ImgCrawl\Service\ImgCrawlService;
 
 class ImgCrawl extends App {
 
@@ -30,8 +32,20 @@ class ImgCrawl extends App {
             return new PageController(
                 $c->query('AppName'),
                 $c->query('Request'),
-                $c->query('L10N')
+                $c->query('ImgCrawlService')
             );
+        });
+
+        $container->registerService('ImgCrawlApiController', function($c){
+            return new ImgCrawlAPIController(
+                $c->query('AppName'),
+                $c->query('Request'),
+                $c->query('ImgCrawlService')
+            );
+        });
+
+        $container->registerService('ImgCrawlService', function($c){
+            return new ImgCrawlService();
         });
 
         /**

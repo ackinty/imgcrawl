@@ -20,5 +20,10 @@ $application->registerRoutes($this, array(
             'url' => '/',
             'verb' => 'GET',
         ),
+        array(
+            'name' => 'img_crawl_api#index',
+            'url' => '/api/1.0/index',
+            'verb' => 'GET',
+        ),
     ),
 ));
