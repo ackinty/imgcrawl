@@ -14,6 +14,7 @@ use \OCP\AppFramework\App;
 use \OCA\ImgCrawl\Controller\PageController;
 use \OCA\ImgCrawl\Controller\ImgCrawlApiController;
 use \OCA\ImgCrawl\Service\ImgCrawlService;
+use \OCA\ImgCrawl\Lib\SimplePieFeedParser;
 
 class ImgCrawl extends App {
 
@@ -45,7 +46,16 @@ class ImgCrawl extends App {
         });
 
         $container->registerService('ImgCrawlService', function($c){
-            return new ImgCrawlService();
+            return new ImgCrawlService(
+                $c->query('FeedParser')
+            );
+        });
+
+        /**
+         * Lib
+         */
+        $container->registerService('FeedParser', function($c) {
+            return new SimplePieFeedParser();
         });
 
         /**
