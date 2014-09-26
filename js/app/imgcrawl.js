@@ -6,9 +6,23 @@
  * @license This file is licensed under the Affero General Public License version 3 or later. See the COPYING file.
  */
 
-var imgcrawl = angular.module('imgcrawl', []);
+var imgcrawl = angular.module('imgcrawl', ['imgcrawl.services.img']);
 
 
-imgcrawl.controller('imgcrawlController', ['$scope', function($scope) {
+imgcrawl.controller('imgcrawlController', ['$scope', 'imgService', function($scope, imgService) {
     $scope.foo = 'bar';
+
+    $scope.init = function() {
+        imgService.getImgs()
+        .success(function(data) {
+            $scope.imgs = data;
+        })
+        .error(function(data) {
+            console.log('Error: ' + data);
+            $scope.error = true;
+        });
+    }
+    $scope.init();
+
+
 }]);

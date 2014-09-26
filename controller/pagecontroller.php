@@ -28,11 +28,7 @@ class PageController extends Controller {
      * @NoCSRFRequired
      */
     public function index() {
-        $images = $this->imgCrawlService->imgCrawl();
-
-        return $this->render('main', array(
-            'images' => $images,
-        ));
+        return $this->render('main');
     }
 
 }
