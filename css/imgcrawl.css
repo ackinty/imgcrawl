@@ -3,7 +3,9 @@ div#imgcrawl {
 }
 
 div#imgcrawl div.title {
-    margin: 1em;
+    margin: 0 1em;
+    padding: 1em;
+    color: #fff;
     text-align: center;
     font-size: 300%;
     font-weight: bold;
@@ -44,4 +46,8 @@ div#imgcrawl h1 a,h1 a:hover {
     font-weight: bold;
     border: 1px solid gray;
     padding: 5px 10px;
+}
+
+div#imgcrawl div.clear {
+    clear: both;
 }
