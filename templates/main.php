@@ -16,20 +16,22 @@
 
 ?>
 
-<div ng-app="imgcrawl" ng-controller="imgcrawlController">
+<div id="imgcrawl" ng-app="imgcrawl" ng-controller="imgcrawlController">
 
-<div id="imgcrawl">
-    ImgCrawl
-</div>
+    <div class="title">
+        ImgCrawl
+    </div>
 
-<div id="container">
-    <div class="blockImg" ng-repeat="img in imgs">
-        <div class="feedImg">
-            <a href="{{ img.siteLink }}" title="{{ img.imgTitle }}">
-                <img src="{{ img.imgSrc }}" height="400" width="400">
-            </a>
+    <div id="container">
+        <div class="blockImg" ng-repeat="img in imgs">
+            <div class="feedImg">
+                <a href="{{ img.siteLink }}" title="{{ img.imgTitle }}">
+                    <img src="{{ img.imgSrc }}" height="400" width="400">
+                </a>
+            </div>
         </div>
     </div>
+
 </div>
 
 <div id="footer">

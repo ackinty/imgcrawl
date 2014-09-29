@@ -1,6 +1,47 @@
-#imgcrawl {
+div#imgcrawl {
+    background-color: #000;
+}
+
+div#imgcrawl div.title {
     margin: 1em;
     text-align: center;
     font-size: 300%;
     font-weight: bold;
+}
+
+div#imgcrawl div.blockImg {
+    float: left;
+}
+div#imgcrawl div.feedImg {
+    float: left;
+}
+div#imgcrawl img {
+    border: 1px solid #999;
+    margin: 0 0 8px 3px;
+}
+div#imgcrawl a {
+    text-decoration: none;
+}
+div#imgcrawl a:hover img {
+    border: 1px solid #999;
+    margin: 0 0 8px 3px;
+}
+div#imgcrawl div.action {
+    float: left;
+    margin-left: -1px;
+    padding: 2px;
+    border-top: 1px solid #999;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #000;
+    border-radius: 0 3px 3px 0;
+}
+div#imgcrawl h1 a,h1 a:hover {
+    text-decoration: none;
+    color: gray;
+    font-size: 70%;
+    font-family: Georgia;
+    font-weight: bold;
+    border: 1px solid gray;
+    padding: 5px 10px;
 }
