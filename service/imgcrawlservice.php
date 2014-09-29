@@ -26,8 +26,8 @@ class ImgCrawlService {
     public function imgCrawl() {
         $images = array();
 
-        $this->feedParser->setFeedUrl('http://conceptships.blogspot.com/feeds/posts/default');
-        // $this->feedParser->setFeedUrl('http://www.reddit.com/r/ImaginaryLandscapes/.rss');
+        // $this->feedParser->setFeedUrl('http://conceptships.blogspot.com/feeds/posts/default');
+        $this->feedParser->setFeedUrl('http://www.reddit.com/r/ImaginaryLandscapes/.rss');
         $items = $this->feedParser->getItems();
 
         foreach ($items as $item) {
@@ -37,18 +37,6 @@ class ImgCrawlService {
             $description = $item->getDescription();
 
             $imgLink = $this->itemParser->parse($this->feedParser->getFeedUrl(), $item);
-            // $id = $item->getId();
-            // $anchor = substr($id, strpos($id, 'post-')+5);
-
-            // $siteLink = $item->getLink() . '#' . $anchor ;
-
-            // // start $imgLink = conceptshipsParse($description());
-            // $imgLink = array('empty.jpg') ;
-            // preg_match_all('%<img src="([^"]*)"[^>]*>%', $description, $matches) ;
-            // if (!empty($matches)) {
-            //     $imgLink =  $matches[1];
-            // }
-            // // end $imgLink = conceptshipsParse($description());
 
             if (!empty($imgLink)) {
                 foreach($imgLink as $imgSrc) {

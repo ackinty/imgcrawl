@@ -20,7 +20,7 @@ Class ItemParser
 {
     public function parse(string $feedUrl, IFeedItem $item)
     {
-        $imgLink = array();
+        $imgLinks = array();
 
         // conceptships
         if (strpos($feedUrl, "conceptships") !== FALSE) {
@@ -29,17 +29,13 @@ Class ItemParser
 
             $siteLink = $item->getLink() . '#' . $anchor ;
             $parser = new ConceptshipsItemParser;
-            $imgLink = $parser->parse($item->getDescription());
+            $imgLinks = $parser->parse($item->getDescription());
         }
         else { // reddit
-            preg_match('%<a href="([^"]*)">\[link\]</a>%', $description, $matches);
-            if(isset($matches[1])) {
-                $link = $matches[0];
-                $siteLink = $matches[1];
-                $imgLink = imgSiteParse($siteLink);
-            }
+            $parser = new RedditItemParser;
+            $imgLinks = $parser->parse($item->getDescription());
         }
 
-        return $imgLink;
+        return $imgLinks;
     }
 }

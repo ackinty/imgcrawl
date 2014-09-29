@@ -33,24 +33,26 @@ Class RedditItemParser implements IItemParser
             }
 
             if (strpos($siteLink, "deviantart") !== FALSE) {
-                return deviantartParse($siteLink);
+                $parser = new DeviantArtItemParser;
+                return $parser->parse($siteLink);
             }
 
             if (strpos($siteLink, "imgur") !== FALSE) {
-                return imgurParse($siteLink);
+                $parser = new ImgurItemParser;
+                return $parser->parse($siteLink);
             }
 
             if (strpos($siteLink, "cghub") !== FALSE) {
-                return cghubParse($siteLink);
+                $parser = new CGHubItemParser;
+                return $parser->parse($siteLink);
             }
 
             if (strpos($siteLink, "conceptships") !== FALSE) {
-                return conceptshipsParse($siteLink);
+                $parser = new ConceptshipsItemParser;
+                return $parser->parse($siteLink);
             }
 
-            $imgLink = imgSiteParse($siteLink);
         }
-
 
         return $imgLink;
     }
