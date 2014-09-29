@@ -26,7 +26,7 @@ class ImgCrawlAPIController extends APIController {
     }
 
     /**
-     * Returns informations from history
+     * Returns list of imgs
      * @NoCSRFRequired
      * @CORS
      */
@@ -37,12 +37,12 @@ class ImgCrawlAPIController extends APIController {
             $images = $this->imgCrawlService->imgCrawl();
         } catch (Exception $e) {
             $response = new JSONResponse();
-            return $response->setStatus(\OCA\AppFramework\Http::STATUS_NOT_FOUND);
+            return $response->setStatus(\OCP\AppFramework\Http::STATUS_NOT_FOUND);
         }
 
         if (empty($images)) {
             $response = new JSONResponse();
-            return $response->setStatus(\OCA\AppFramework\Http::STATUS_NOT_FOUND);
+            return $response->setStatus(\OCP\AppFramework\Http::STATUS_NOT_FOUND);
         }
 
         return new JSONResponse($images);
