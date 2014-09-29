@@ -13,10 +13,12 @@ namespace OCA\ImgCrawl\Service;
 class ImgCrawlService {
 
     protected $feedParser;
+    protected $itemParser;
     protected $cache;
 
-    public function __construct(\OCA\ImgCrawl\Lib\IFeedParser $feedParser) {
+    public function __construct(\OCA\ImgCrawl\Lib\IFeedParser $feedParser, \OCA\ImgCrawl\Lib\ItemParser $itemParser) {
         $this->feedParser = $feedParser;
+        $this->itemParser = $itemParser;
 
         $this->cache = array();
     }
@@ -25,24 +27,28 @@ class ImgCrawlService {
         $images = array();
 
         $this->feedParser->setFeedUrl('http://conceptships.blogspot.com/feeds/posts/default');
+        // $this->feedParser->setFeedUrl('http://www.reddit.com/r/ImaginaryLandscapes/.rss');
         $items = $this->feedParser->getItems();
 
         foreach ($items as $item) {
+            // TODO: cache
+
             $link = $siteLink = $description = '';
             $description = $item->getDescription();
 
-            $id = $item->getId();
-            $anchor = substr($id, strpos($id, 'post-')+5);
+            $imgLink = $this->itemParser->parse($this->feedParser->getFeedUrl(), $item);
+            // $id = $item->getId();
+            // $anchor = substr($id, strpos($id, 'post-')+5);
 
-            $siteLink = $item->getLink() . '#' . $anchor ;
+            // $siteLink = $item->getLink() . '#' . $anchor ;
 
-            // start $imgLink = conceptshipsParse($description());
-            $imgLink = array('empty.jpg') ;
-            preg_match_all('%<img src="([^"]*)"[^>]*>%', $description, $matches) ;
-            if (!empty($matches)) {
-                $imgLink =  $matches[1];
-            }
-            // end $imgLink = conceptshipsParse($description());
+            // // start $imgLink = conceptshipsParse($description());
+            // $imgLink = array('empty.jpg') ;
+            // preg_match_all('%<img src="([^"]*)"[^>]*>%', $description, $matches) ;
+            // if (!empty($matches)) {
+            //     $imgLink =  $matches[1];
+            // }
+            // // end $imgLink = conceptshipsParse($description());
 
             if (!empty($imgLink)) {
                 foreach($imgLink as $imgSrc) {

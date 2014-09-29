@@ -17,6 +17,7 @@ if(!class_exists('\SimplePie')) {
 Class SimplePieFeedParser implements IFeedParser
 {
     protected $feed;
+    protected $feedUrl;
 
     public function __construct()
     {
@@ -28,9 +29,19 @@ Class SimplePieFeedParser implements IFeedParser
      */
     public function setFeedUrl($url)
     {
+        $this->feedUrl = $url;
+
         $this->feed->set_feed_url($url);
         $this->feed->init();
         $this->feed->handle_content_type();
+    }
+
+    /**
+     * @return string The feed's url
+     */
+    public function getFeedUrl()
+    {
+        return $this->feedUrl;
     }
 
     /**

@@ -20,6 +20,11 @@ Interface IFeedParser
     public function setFeedUrl($url);
 
     /**
+     * @return string The feed's url
+     */
+    public function getFeedUrl();
+
+    /**
      * @return array OCA\ImgCrawl\Lib\IFeedItem[]
      */
     public function getItems();
