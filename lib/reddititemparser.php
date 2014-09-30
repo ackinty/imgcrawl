@@ -17,43 +17,44 @@ Class RedditItemParser implements IItemParser
 {
     public function parse($link)
     {
-        $imgLink = array('empty.jpg');
+        $imagesInfos = array();
 
         preg_match('%<a href="([^"]*)">\[link\]</a>%', $link, $matches);
         if(isset($matches[1])) {
             $link = $matches[0];
             $siteLink = $matches[1];
 
+            $images = array();
+
             if (strpos($siteLink, "jpg") !== FALSE) {
-                return array($siteLink);
+                $images =  array($siteLink);
             }
-
-            if (strpos($siteLink, "png") !== FALSE) {
-                return array($siteLink);
+            elseif (strpos($siteLink, "png") !== FALSE) {
+                $images =  array($siteLink);
             }
-
-            if (strpos($siteLink, "deviantart") !== FALSE) {
+            elseif (strpos($siteLink, "deviantart") !== FALSE) {
                 $parser = new DeviantArtItemParser;
-                return $parser->parse($siteLink);
+                $images =  $parser->parse($siteLink);
             }
-
-            if (strpos($siteLink, "imgur") !== FALSE) {
+            elseif (strpos($siteLink, "imgur") !== FALSE) {
                 $parser = new ImgurItemParser;
-                return $parser->parse($siteLink);
+                $images =  $parser->parse($siteLink);
             }
-
-            if (strpos($siteLink, "cghub") !== FALSE) {
+            elseif (strpos($siteLink, "cghub") !== FALSE) {
                 $parser = new CGHubItemParser;
-                return $parser->parse($siteLink);
+                $images =  $parser->parse($siteLink);
+            }
+            elseif (strpos($siteLink, "conceptships") !== FALSE) {
+                $parser = new ConceptshipsItemParser;
+                $images =  $parser->parse($siteLink);
             }
 
-            if (strpos($siteLink, "conceptships") !== FALSE) {
-                $parser = new ConceptshipsItemParser;
-                return $parser->parse($siteLink);
+            foreach($images as $image) {
+                array_push($imagesInfos, new ImageInfo($image, '', '', $siteLink));
             }
 
         }
 
-        return $imgLink;
+        return $imagesInfos;
     }
 }

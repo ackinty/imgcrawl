@@ -51,7 +51,7 @@ Class SimplePieFeedParser implements IFeedParser
     {
         $feedItems = array();
 
-        $items = $this->feed->get_items(0,20);
+        $items = $this->feed->get_items(0,10);
         while($item = array_shift($items)) {
             array_push($feedItems, new SimplePieFeedItem($item));
         }

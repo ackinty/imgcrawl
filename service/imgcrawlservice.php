@@ -36,20 +36,19 @@ class ImgCrawlService {
             $link = $siteLink = $description = '';
             $description = $item->getDescription();
 
-            $imgLink = $this->itemParser->parse($this->feedParser->getFeedUrl(), $item);
-
-            if (!empty($imgLink)) {
-                foreach($imgLink as $imgSrc) {
-                    array_push($images, array(
-                        'siteLink' => $siteLink,
-                        'imgTitle' => $item->getTitle(),
-                        'imgSrc' => $imgSrc,
-                        'itemId' => $item->getId(),
-                    ));
+            $imagesInfos = $this->itemParser->parse($this->feedParser->getFeedUrl(), $item);
+$f = fopen('/tmp/truc.log', 'a');
+fputs($f, print_r($imagesInfos, true));
+fclose($f);
+            if (!empty($imagesInfos)) {
+                foreach($imagesInfos as $imgInfo) {
+                    array_push($images, $imgInfo);
                 }
             }
         }
-
+$f = fopen('/tmp/truc.log', 'a');
+fputs($f, print_r($images, true));
+fclose($f);
         unset($this->feedParser) ;
 
         return $images;

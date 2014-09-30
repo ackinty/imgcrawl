@@ -30,10 +30,28 @@ Class ItemParser
             $siteLink = $item->getLink() . '#' . $anchor ;
             $parser = new ConceptshipsItemParser;
             $imgLinks = $parser->parse($item->getDescription());
+
+            $imagesInfos = array();
+            foreach($imgLinks as $imgLink) {
+                $imgInfo = new ImageInfo(
+                    $imgLink,
+                    $item->getTitle(),
+                    $siteLink,
+                    $item->getId()
+                );
+                array_push($imagesInfos, $imgInfo);
+            }
+            return $imagesInfos;
         }
         else { // reddit
             $parser = new RedditItemParser;
             $imgLinks = $parser->parse($item->getDescription());
+
+            foreach($imgLinks as $imgInfo) {
+                $imgInfo->imgTitle = $item->getTitle();
+                $imgInfo->originalPost = $item->getId();
+                array_push($imagesInfos, $imgInfo);
+            }
         }
 
         return $imgLinks;

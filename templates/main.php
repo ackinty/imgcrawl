@@ -25,9 +25,13 @@
     <div id="container">
         <div class="blockImg" ng-repeat="img in imgs">
             <div class="feedImg">
-                <a href="{{ img.siteLink }}" title="{{ img.imgTitle }}">
+                <a href="{{ img.originalImgUrl }}" title="{{ img.imgTitle }}">
                     <img src="{{ img.imgSrc }}" height="400" width="400">
                 </a>
+            </div>
+            <div class="action">
+                <a href="{{ img.originalPost }}" title="Lien vers le post d'origine">Post</a><br>
+                <a href="">EE</a>
             </div>
         </div>
         <div class="clear"></div>
