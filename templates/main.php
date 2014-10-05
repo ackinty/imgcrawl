@@ -18,12 +18,17 @@
 
 <div id="imgcrawl" ng-app="imgcrawl" ng-controller="imgcrawlController">
 
-    <div class="title">
-        ImgCrawl
+    <div class="nav">
+        <div class="title">
+            ImgCrawl
+        </div>
     </div>
 
     <div id="container">
-        <div class="blockImg" ng-repeat="img in imgs">
+        <div id="msg" ng-show="" ng-cloak>
+            <p ng-repeat="msg in messages">{{ msg }}</p>
+        </div>
+        <div class="blockImg" ng-repeat="img in imgs" ng-cloak>
             <div class="feedImg">
                 <a href="{{ img.originalImgUrl }}" title="{{ img.imgTitle }}">
                     <img src="{{ img.imgSrc }}" height="400" width="400">

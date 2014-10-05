@@ -27,7 +27,11 @@ class ImgCrawlService {
         $images = array();
 
         // $this->feedParser->setFeedUrl('http://conceptships.blogspot.com/feeds/posts/default');
-        $this->feedParser->setFeedUrl('http://www.reddit.com/r/ImaginaryLandscapes/.rss');
+        // $this->feedParser->setFeedUrl('http://www.reddit.com/r/ImaginaryLandscapes/.rss');
+        // $this->feedParser->setFeedUrl('http://www.reddit.com/r/SpecArt/.rss');
+        // $this->feedParser->setFeedUrl('http://www.reddit.com/r/ImaginaryCharacters/.rss');
+        // $this->feedParser->setFeedUrl('http://www.reddit.com/r/ImaginaryMonsters/.rss');
+        $this->feedParser->setFeedUrl('http://www.reddit.com/r/ImaginaryTechnology/.rss');
         $items = $this->feedParser->getItems();
 
         foreach ($items as $item) {
@@ -37,18 +41,14 @@ class ImgCrawlService {
             $description = $item->getDescription();
 
             $imagesInfos = $this->itemParser->parse($this->feedParser->getFeedUrl(), $item);
-$f = fopen('/tmp/truc.log', 'a');
-fputs($f, print_r($imagesInfos, true));
-fclose($f);
+
             if (!empty($imagesInfos)) {
                 foreach($imagesInfos as $imgInfo) {
                     array_push($images, $imgInfo);
                 }
             }
         }
-$f = fopen('/tmp/truc.log', 'a');
-fputs($f, print_r($images, true));
-fclose($f);
+
         unset($this->feedParser) ;
 
         return $images;

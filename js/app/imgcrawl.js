@@ -6,11 +6,13 @@
  * @license This file is licensed under the Affero General Public License version 3 or later. See the COPYING file.
  */
 
-var imgcrawl = angular.module('imgcrawl', ['imgcrawl.services.img']);
+var imgcrawl = angular
+.module('imgcrawl', ['imgcrawl.services.img'])
+.controller('imgcrawlController', ['$scope', 'imgService', imgcrawlController]);
 
-
-imgcrawl.controller('imgcrawlController', ['$scope', 'imgService', function($scope, imgService) {
+function imgcrawlController($scope, imgService) {
     $scope.foo = 'bar';
+    $scope.messages = [];
 
     $scope.init = function() {
         imgService.getImgs()
@@ -23,6 +25,4 @@ imgcrawl.controller('imgcrawlController', ['$scope', 'imgService', function($sco
         });
     }
     $scope.init();
-
-
-}]);
+}

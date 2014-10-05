@@ -19,13 +19,22 @@ Class DeviantArtItemParser implements IItemParser
     {
         $imgLink = array('empty.jpg');
 
-        $code = join('', file($siteLink)) ;
-        preg_match('%<img *name="gmi-ResViewSizer_fullimg[^>]*src="([^"]*)"[^>]*>%', $code, $matches) ;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $siteLink);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'imgcrawl');
+        $code = curl_exec($ch);
+
+        // preg_match('%<img *name="gmi-ResViewSizer_fullimg[^>]*src="([^"]*)"[^>]*>%', $code, $matches) ;
+
+        // 20141004
+        preg_match('%<img[^>]*src="([^"]*)"[^>]*class="dev-content-full"[^>]*>%', $code, $matches) ;
 
         if (isset($matches[1])) {
             $imgLink = $matches[1];
         }
 
-        return $imgLink;
+        return array($imgLink);
     }
 }

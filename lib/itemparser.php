@@ -10,7 +10,7 @@
 
 namespace OCA\ImgCrawl\Lib;
 
-use \OCA\ImgCrawl\Lib\ConceptshipsItemParser;
+// use \OCA\ImgCrawl\Lib\ConceptshipsItemParser;
 
 /**
  * Parse a feed item to extract images
@@ -43,7 +43,7 @@ Class ItemParser
             }
             return $imagesInfos;
         }
-        else { // reddit
+        elseif (strpos($feedUrl, "reddit.com") !== FALSE) { // reddit
             $parser = new RedditItemParser;
             $imgLinks = $parser->parse($item->getDescription());
 
