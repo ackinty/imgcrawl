@@ -1,6 +1,11 @@
+body {
+    background-color: #000;
+}
+
 div#imgcrawl {
     background-color: #000;
     height: 100%;
+    width: 100%;
 }
 
 div#imgcrawl div.title {
@@ -52,4 +57,8 @@ div#imgcrawl h1 a,h1 a:hover {
 
 div#imgcrawl div.clear {
     clear: both;
+}
+
+div #imgcrawlFooter {
+    clear:both;
 }

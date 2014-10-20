@@ -19,6 +19,8 @@
 <div id="imgcrawl" ng-app="imgcrawl" ng-controller="imgcrawlController">
 
     <div class="nav">
+        <select ng-model="selectedFeed" id="feedId" ng-options="feed as feed.title for feed in knownFeeds" ng-change="updateFeed(selectedFeed.id)"></select>
+
         <div class="title">
             ImgCrawl
         </div>
@@ -39,12 +41,13 @@
                 <a href="">EE</a>
             </div>
         </div>
-        <div class="clear"></div>
     </div>
+
+    <div class="clear"></div>
 
 </div>
 
-<div id="footer">
+<div id="imgcrawlFooter">
 
 </div>
 

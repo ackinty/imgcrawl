@@ -8,10 +8,16 @@
 
 angular.module('imgcrawl.services.img', [])
     .factory('imgService', ['$http', function($http){
-        var doGetImgs = function() {
-            return $http.get(OC.generateUrl('/apps/imgcrawl/api/1.0/index'));
+        var doGetImgs = function(feedId) {
+            return $http.get(OC.generateUrl('/apps/imgcrawl/api/1.0/imgs/'+feedId));
         }
+
+        var doGetKnownFeeds = function() {
+            return $http.get(OC.generateUrl('/apps/imgcrawl/api/1.0/known_feeds'));
+        }
+
         return {
-            getImgs: function() { return doGetImgs(); },
+            getImgs: function(feedId) { return doGetImgs(feedId); },
+            getKnownFeeds: function() { return doGetKnownFeeds(); }
         };
     }]);

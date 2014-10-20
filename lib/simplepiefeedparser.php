@@ -18,6 +18,7 @@ Class SimplePieFeedParser implements IFeedParser
 {
     protected $feed;
     protected $feedUrl;
+    const NB_IMG = 2;
 
     public function __construct()
     {
@@ -51,7 +52,7 @@ Class SimplePieFeedParser implements IFeedParser
     {
         $feedItems = array();
 
-        $items = $this->feed->get_items(0,2);
+        $items = $this->feed->get_items(0,self::NB_IMG);
         while($item = array_shift($items)) {
             array_push($feedItems, new SimplePieFeedItem($item));
         }

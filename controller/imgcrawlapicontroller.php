@@ -15,11 +15,13 @@ use \OCP\AppFramework\Http\JSONResponse;
 use \OCP\IRequest;
 use \OCP\IConfig;
 
-class ImgCrawlAPIController extends APIController {
+class ImgCrawlAPIController extends APIController
+{
 
     protected $imgCrawlService;
 
-    public function __construct($appName, IRequest $request, ImgCrawlService $imgCrawlService){
+    public function __construct($appName, IRequest $request, ImgCrawlService $imgCrawlService)
+    {
         parent::__construct($appName, $request, 'GET');
 
         $this->imgCrawlService = $imgCrawlService;
@@ -30,11 +32,12 @@ class ImgCrawlAPIController extends APIController {
      * @NoCSRFRequired
      * @CORS
      */
-    public function index() {
+    public function getImages($feedId=1)
+    {
         $images = array();
 
         try {
-            $images = $this->imgCrawlService->imgCrawl();
+            $images = $this->imgCrawlService->imgCrawl($feedId);
         } catch (Exception $e) {
             $response = new JSONResponse();
             return $response->setStatus(\OCP\AppFramework\Http::STATUS_NOT_FOUND);
@@ -48,4 +51,21 @@ class ImgCrawlAPIController extends APIController {
         return new JSONResponse($images);
     }
 
+    /**
+     * Returns list of known feeds url
+     * @CORS
+     */
+    public function getKnownFeeds()
+    {
+        $knownFeeds = array();
+
+        try {
+            $knownFeeds = $this->imgCrawlService->getKnownFeeds();
+        } catch (Exception $e) {
+            $response = new JSONResponse();
+            return $response->setStatus(\OCP\AppFramework\Http::STATUS_NOT_FOUND);
+        }
+
+        return new JSONResponse($knownFeeds);
+    }
 }

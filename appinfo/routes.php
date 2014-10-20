@@ -21,8 +21,13 @@ $application->registerRoutes($this, array(
             'verb' => 'GET',
         ),
         array(
-            'name' => 'img_crawl_api#index',
-            'url' => '/api/1.0/index',
+            'name' => 'img_crawl_api#get_images',
+            'url' => '/api/1.0/imgs/{feedId}',
+            'verb' => 'GET',
+        ),
+        array(
+            'name' => 'img_crawl_api#get_known_feeds',
+            'url' => '/api/1.0/known_feeds',
             'verb' => 'GET',
         ),
     ),
