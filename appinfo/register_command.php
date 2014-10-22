@@ -8,4 +8,4 @@
  * @license This file is licensed under the Affero General Public License version 3 or later. See the COPYING file.
  */
 
-$application->add(new OCA\ImgCrawl\Command\Populate);
+$application->add(new OCA\ImgCrawl\Command\DoNothing);
